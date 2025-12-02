@@ -27,8 +27,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.js"
         integrity="sha512-+dJa1RvuE8/HFftifMtr7hqixdEkb/DizfXUZAA0pyZeVdNnyZyKy9RnIWi0JSWUznbCNbaQNn0E6nbtrdL+9g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     </script>
+    
 
     <script>
         new Vue({
@@ -46,7 +47,7 @@
                         });
                         localStorage.setItem('token', response.data.token);
                         alert("login successful");
-                        window.location.href = "dashboard.html";
+                        window.location.href = "products.html";
                     } catch (error) {
                         console.error("Login failed");
                     }
