@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales</title>
+    <title>Purchases</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -21,7 +21,7 @@
         <li class="nav-item">
             <a class="nav-link text-white bg-dark" href="sales.html">Sales</a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link text-white bg-dark" href="purchases.html">Purchases</a>
         </li>
         <li class="nav-item">
@@ -34,11 +34,11 @@
 
     
     <div class="container" id="app">
-        <h1>Sales Page</h1>
+        <h1>Purchases Page</h1>
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Add Sale
+            Add Purchase
         </button>
 
         <!-- Modal -->
@@ -46,19 +46,19 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Sale</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Purchase</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form @submit.prevent="addSales">
+                        <form @submit.prevent="addPurchases">
                             <div class="mb-3">
                                 <label for="product_id" class="form-label">Product ID</label>
-                                <input type="text" class="form-control" id="product_id" v-model="newSale.product_id"
+                                <input type="text" class="form-control" id="product_id" v-model="newPurchase.product_id"
                                     aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="quantity" class="form-label">Quantity</label>
-                                <input type="number" class="form-control" id="quantity" v-model="newSale.quantity">
+                                <label for="stock_quantity" class="form-label">Stock Quantity</label>
+                                <input type="number" class="form-control" id="stock_quantity" v-model="newPurchase.stock_quantity">
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -72,15 +72,15 @@
             <thead>
                 <th>ID</th>
                 <th>Product ID</th>
-                <th>Quantity</th>
+                <th>Stock Quantity</th>
                 <th>Created AT</th>
             </thead>
             <tbody>
-                <tr v-for="sale in sales" :key="sale.id">
-                    <td>{{ sale.id }}</td>
-                    <td>{{ sale["product_id"] }}</td>
-                    <td>{{ sale["quantity"] }}</td>
-                    <td>{{ sale["created_at"] }}</td>
+                <tr v-for="purchase in purchases" :key="purchase.id">
+                    <td>{{ purchase.id }}</td>
+                    <td>{{ purchase["product_id"] }}</td>
+                    <td>{{ purchase["stock_quantity"] }}</td>
+                    <td>{{ purchase["created_at"] }}</td>
                 </tr>
             </tbody>
 
@@ -101,40 +101,40 @@
                 el: '#app',
                 data: {
                     // Define your data properties here
-                    newSale: {
+                    newPurchase: {
                         product_id: '',
-                        quantity: ''
+                        stock_quantity: ''
                     },
-                    sales: []
+                    purchases: []
                 },
                 methods: {
                     // Define your methods here
-                    async addSales() {
+                    async addPurchases() {
                         const headers = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
                         try {
-                            const response = await axios.post('http://127.0.0.1:5000/sales', {
-                                product_id: this.newSale.product_id,
-                                quantity: this.newSale.quantity
+                            const response = await axios.post('http://127.0.0.1:5000/purchases', {
+                                product_id: this.newPurchase.product_id,
+                                stock_quantity: this.newPurchase.stock_quantity
                             }, headers);
-                            alert('Sale added successfully');
+                            alert('Purchase added successfully');
                         } catch (error) {
-                            console.error('Error adding sale:', error);
+                            console.error('Error adding purchase:', error);
                         }
                     },
-                    async fetchSales() {
+                    async fetchPurchases() {
                         const headers = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
                         try {
-                            const response = await axios.get('http://127.0.0.1:5000/sales', headers);
-                            this.sales = response.data;
+                            const response = await axios.get('http://127.0.0.1:5000/purchases', headers);
+                            this.purchases = response.data;
                         }
                         catch (error) {
-                            console.error('Error fetching sales:', error);
+                            console.error('Error fetching purchases:', error);
                         }
                     }
                 },
                 mounted() {
                     if (localStorage.getItem('token') !== null) {
-                        this.fetchSales();
+                        this.fetchPurchases();
                     } else {
                         window.location.href = "login.html";
                     }
