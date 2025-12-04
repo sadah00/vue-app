@@ -10,26 +10,48 @@
 </head>
 
 <body>
-    <form id="app" @submit.prevent="loginUser" style="width: 50%; margin: auto; padding-top: 50px;">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" autocomplete="email" v-model="email" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" v-model="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <ul class="nav nav-underline justify-content-center bg-dark opacity-50 text-uppercase mb-4 p-3 ">
+        <li class="nav-item">
+            <a class="nav-link text-white bg-dark active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white bg-dark" href="products.html">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white bg-dark" href="sales.html">Sales</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white bg-dark " href="register.html">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white bg-dark" href="login.html">Login</a>
+        </li>
+    </ul>
 
-    </form>
+    <div class="container">
+        <h1>Login Page</h1>
+        
+        <form id="app" @submit.prevent="loginUser" style="width: 50%; margin: auto; padding-top: 50px;">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" autocomplete="email" v-model="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" v-model="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.7/vue.min.js"
         integrity="sha512-PhuYrdDBtBeUjY7KTmjRYFFadw8uXXdTmzZyhCHZewYsqZJ0pxFCwU528jRoil42LXMW3ksegQT5zdjkfiR1IA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.js"
         integrity="sha512-+dJa1RvuE8/HFftifMtr7hqixdEkb/DizfXUZAA0pyZeVdNnyZyKy9RnIWi0JSWUznbCNbaQNn0E6nbtrdL+9g=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
-    
+        </script>
+
 
     <script>
         new Vue({
