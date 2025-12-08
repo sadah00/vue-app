@@ -5,39 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchases</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 </head>
 
 <body>
-    <ul class="nav nav-underline justify-content-center bg-dark opacity-50 text-uppercase mb-4 p-3 ">
+    <ul class="nav nav-underline justify-content-center bg-danger opacity-50 text-uppercase mb-4 p-3  red-600">
         <li class="nav-item">
-            <a class="nav-link text-white bg-dark active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link text-white active" aria-current="page" href="index.html">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white bg-dark" href="products.html">Products</a>
+            <a class="nav-link text-white" href="products.html">Products</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white bg-dark" href="sales.html">Sales</a>
+            <a class="nav-link text-white" href="sales.html">Sales</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white bg-dark" href="purchases.html">Purchases</a>
+            <a class="nav-link text-white " href="purchases.html">Purchases</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white bg-dark " href="register.html">Register</a>
+            <a class="nav-link text-white " href="register.html">Register</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white bg-dark" href="login.html">Login</a>
+            <a class="nav-link text-white " href="login.html">Login</a>
         </li>
     </ul>
 
-    
+
     <div class="container" id="app">
         <h1>Purchases Page</h1>
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add Purchase
         </button>
 
@@ -58,7 +59,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="stock_quantity" class="form-label">Stock Quantity</label>
-                                <input type="number" class="form-control" id="stock_quantity" v-model="newPurchase.stock_quantity">
+                                <input type="number" class="form-control" id="stock_quantity"
+                                    v-model="newPurchase.stock_quantity">
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -68,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
+        <table id="purchasesTable" class="table table-striped">
             <thead>
                 <th>ID</th>
                 <th>Product ID</th>
@@ -85,6 +87,13 @@
             </tbody>
 
         </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
+
+        <script>
+            let table = new DataTable('#purchasesTable');
+        </script>
+
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.7/vue.min.js"
@@ -143,6 +152,58 @@
             });
         </script>
     </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-light pt-4 pb-2 position-sticky mt-4">
+        <div class="container">
+            <div class="row">
+                <!-- Address -->
+                <div class="col-md-4 mb-3">
+                    <h5>Contact Us</h5>
+                    <p>
+                        <i class="bi bi-geo-alt-fill me-2"></i>123 Street, New York, USA
+                    </p>
+                    <p>
+                        <i class="bi bi-envelope-fill me-2"></i>info@example.com
+                    </p>
+                    <p>
+                        <i class="bi bi-telephone-fill me-2"></i>(+012) 3456 7890
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-4 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-chevron-right me-2"></i><a href="#"
+                                class="text-light text-decoration-none">About Us</a></li>
+                        <li><i class="bi bi-chevron-right me-2"></i><a href="#"
+                                class="text-light text-decoration-none">Privacy Policy</a></li>
+                        <li><i class="bi bi-chevron-right me-2"></i><a href="#"
+                                class="text-light text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div class="col-md-4 mb-3">
+                    <h5>Follow Us</h5>
+                    <a href="https://www.facebook.com/" class="text-light me-3" target="_blank"><i
+                            class="bi bi-facebook"></i></a>
+                    <a href="https://x.com/" class="text-light me-3" target="_blank"><i class="bi bi-twitter"></i></a>
+                    <a href="https://www.instagram.com/" class="text-light me-3" target="_blank"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/" class="text-light" target="_blank"><i
+                            class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            <hr class="border-light">
+            <p class="text-center mb-0">&copy; 2025 YourSite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
