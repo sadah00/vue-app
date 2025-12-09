@@ -26,6 +26,9 @@
             <a class="nav-link text-white " href="purchases.html">Purchases</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link text-white " href="dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link text-white  " href="register.html">Register</a>
         </li>
         <li class="nav-item">
@@ -134,6 +137,7 @@
                                 selling_price: this.newProduct.selling_price
                             }, headers);
                             alert('Product added successfully');
+                            this.fetchProducts();
                         } catch (error) {
                             console.error('Error adding product:', error);
                         }

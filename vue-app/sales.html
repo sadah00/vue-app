@@ -26,6 +26,9 @@
             <a class="nav-link text-white " href="purchases.html">Purchases</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link text-white " href="dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link text-white  " href="register.html">Register</a>
         </li>
         <li class="nav-item">
@@ -126,6 +129,7 @@
                                 quantity: this.newSale.quantity
                             }, headers);
                             alert('Sale added successfully');
+                            this.fetchSales();
                         } catch (error) {
                             console.error('Error adding sale:', error);
                         }
