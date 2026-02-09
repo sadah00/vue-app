@@ -140,7 +140,7 @@
                     async fetchPurchases() {
                         const headers = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
                         try {
-                            const response = await axios.get('http://127.0.0.1:5000/purchases', headers);
+                            const response = await axios.get('http://127.0.0.1:8000/purchases', headers);
                             this.purchases = response.data;
                         }
                         catch (error) {

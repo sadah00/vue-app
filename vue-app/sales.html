@@ -124,7 +124,7 @@
                     async addSales() {
                         const headers = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
                         try {
-                            const response = await axios.post('http://127.0.0.1:5000/sales', {
+                            const response = await axios.post('http://127.0.0.1:8000/sales', {
                                 product_id: this.newSale.product_id,
                                 quantity: this.newSale.quantity
                             }, headers);

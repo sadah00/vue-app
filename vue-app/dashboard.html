@@ -119,7 +119,7 @@
             methods: {
                 async fetchData() {
                     try {
-                        const prods = await axios.get("http://127.0.0.1:5000/dashboard");
+                        const prods = await axios.get("http://127.0.0.1:8000/dashboard");
                         this.data = prods.data.data;
                         this.labels = prods.data.labels;
 
