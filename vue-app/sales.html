@@ -16,33 +16,40 @@
         <li class="nav-item">
             <a class="nav-link text-white " aria-current="page" href="index.html">Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-white " href="products.html">Products</a>
+        <li class="nav-item" v-if="!loggedin">
+            <a class="nav-link text-white" href="products.html">Products</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!loggedin">
             <a class="nav-link text-white " href="sales.html">Sales</a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item" v-if="!loggedin">
             <a class="nav-link text-white " href="purchases.html">Purchases</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!loggedin">
             <a class="nav-link text-white " href="dashboard.html">Dashboard</a>
         </li>
-        <li class="nav-item">
+
+        <li class="nav-item" v-if="!loggedin">
+            <a class="nav-link text-white " @click="logout">Logout</a>
+        </li>
+
+        <li class="nav-item" v-if="loggedin">
             <a class="nav-link text-white  " href="register.html">Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="loggedin">
             <a class="nav-link text-white " href="login.html">Login</a>
         </li>
     </ul>
 
-    
+
+
     <div class="container" id="app">
         <h1>Sales Page</h1>
 
         <!-- Button trigger modal -->
-         <div class="text-center">
-            <button type="button" class="btn btn-dark w-50 mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="text-center">
+            <button type="button" class="btn btn-dark w-50 mt-3 mb-3" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
                 Add Sales
             </button>
         </div>
@@ -117,7 +124,8 @@
                         product_id: '',
                         quantity: ''
                     },
-                    sales: []
+                    sales: [],
+                    loggedin: true
                 },
                 methods: {
                     // Define your methods here
@@ -137,12 +145,16 @@
                     async fetchSales() {
                         const headers = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
                         try {
-                            const response = await axios.get('http://127.0.0.1:5000/sales', headers);
+                            const response = await axios.get('http://127.0.0.1:8000/sales', headers);
                             this.sales = response.data;
                         }
                         catch (error) {
                             console.error('Error fetching sales:', error);
                         }
+                    },
+                    async logout() {
+                        localStorage.setItem('token', "");
+                        window.location.href = "login.html";
                     }
                 },
                 mounted() {
@@ -190,10 +202,13 @@
                 <!-- Social Media -->
                 <div class="col-md-4 mb-3">
                     <h5>Follow Us</h5>
-                    <a href="https://www.facebook.com/" class="text-light me-3" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.facebook.com/" class="text-light me-3" target="_blank"><i
+                            class="bi bi-facebook"></i></a>
                     <a href="https://x.com/" class="text-light me-3" target="_blank"><i class="bi bi-twitter"></i></a>
-                    <a href="https://www.instagram.com/" class="text-light me-3" target="_blank"><i class="bi bi-instagram"></i></a>
-                    <a href="https://www.linkedin.com/" class="text-light" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/" class="text-light me-3" target="_blank"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/" class="text-light" target="_blank"><i
+                            class="bi bi-linkedin"></i></a>
                 </div>
             </div>
             <hr class="border-light">

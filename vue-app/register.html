@@ -11,26 +11,32 @@
 </head>
 
 <body>
+
     <ul class="nav nav-underline justify-content-center bg-success opacity-50 text-uppercase mb-4 p-3 ">
         <li class="nav-item">
             <a class="nav-link text-white " aria-current="page" href="index.html">Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-white " href="products.html">Products</a>
+        <li class="nav-item" v-if="!loggedin">
+            <a class="nav-link text-white" href="products.html">Products</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!loggedin">
             <a class="nav-link text-white " href="sales.html">Sales</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!loggedin">
             <a class="nav-link text-white " href="purchases.html">Purchases</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!loggedin">
             <a class="nav-link text-white " href="dashboard.html">Dashboard</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="register.html">Register</a>
+
+        <li class="nav-item" v-if="!loggedin">
+            <a class="nav-link text-white " @click="logout">Logout</a>
         </li>
-        <li class="nav-item">
+
+        <li class="nav-item" v-if="loggedin">
+            <a class="nav-link text-white  " href="register.html">Register</a>
+        </li>
+        <li class="nav-item" v-if="loggedin">
             <a class="nav-link text-white " href="login.html">Login</a>
         </li>
     </ul>
@@ -47,9 +53,9 @@
                                 style="width: 50%; margin: auto; padding-top: 50px;">
 
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" autocomplete="username"
-                                        v-model="username" required>
+                                    <label for="full_name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="full_name" autocomplete="full_name"
+                                        v-model="full_name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email address</label>
@@ -61,7 +67,7 @@
                                     <input type="password" class="form-control" id="password" v-model="password"
                                         required>
                                 </div>
-                                
+
                                 <!-- Register Button -->
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-dark btn-lg rounded-3">Register</button>
@@ -90,28 +96,35 @@
         new Vue({
             el: '#app',
             data: {
-                username: '',
+                full_name: '',
                 email: '',
                 password: '',
-                message: ''
+                message: '',
+                loggedin: true
             },
             methods: {
                 async registerUser() {
-                    if (this.username === "" || this.email === "" || this.password === "") {
+                    if (this.full_name === "" || this.email === "" || this.password === "") {
                         alert("All fields are required.");
                     } try {
                         const response = await axios.post('http://127.0.0.1:8000/register', {
-                            username: this.username,
+                            full_name: this.full_name,
                             email: this.email,
                             password: this.password
                         });
-                        alert("registered");
-                        this.message = "Registration successful!";
+                        localStorage.setItem('token', response.data.access_token);
+                        alert("Registration successful!");
+                        window.location.href = "dashboard.html";
+
 
                     } catch (error) {
                         console.error("Registration failed");
 
                     }
+                },
+                async logout() {
+                    localStorage.setItem('token', "");
+                    window.location.href = "login.html";
                 }
             }
         });
